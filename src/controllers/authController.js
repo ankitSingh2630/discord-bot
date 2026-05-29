@@ -16,6 +16,7 @@ const signup = async (req, res) => {
     const {
       firstName,
       lastName,
+      username,
       emailId,
       password
     } = req.body;
@@ -23,13 +24,13 @@ const signup = async (req, res) => {
     const existingUser =
       await User.findOne({
         where: {
-          emailId
+          username
         }
       });
 
     if (existingUser) {
       return res.status(400).json({
-        message: "Email already exists"
+        message: "username already exists"
       });
     }
 
@@ -40,6 +41,7 @@ const signup = async (req, res) => {
       await User.create({
         firstName,
         lastName,
+        username,
         emailId,
         password: hashedPassword
       });
@@ -52,7 +54,9 @@ const signup = async (req, res) => {
   } catch (err) {
 
     return res.status(400).json({
-      message: err.message
+      message: err.message,
+       error: err.errors
+
     });
 
   }
@@ -64,20 +68,16 @@ const login = async (req, res) => {
   try {
 
     const {
-      emailId,
+      username,
       password
     } = req.body;
 
-    if (!validator.isEmail(emailId)) {
-      throw new Error(
-        "Invalid email format"
-      );
-    }
+    
 
     const user =
       await User.findOne({
         where: {
-          emailId
+          username
         }
       });
 

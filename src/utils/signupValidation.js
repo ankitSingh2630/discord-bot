@@ -5,14 +5,18 @@ const validateSignupData = (req) => {
  const {
    firstName,
    lastName,
+   username,
    emailId,
    password
  } = req.body;
 
- if(!firstName || !lastName){
+ if(!firstName || !lastName ){
     throw new Error("Name required");
  }
 
+ if(!username){
+    throw new Error("Username required");
+ }
  if(!validator.isEmail(emailId)){
     throw new Error("Invalid email");
  }

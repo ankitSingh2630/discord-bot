@@ -12,7 +12,7 @@ const startServer = async () => {
     await sequelize.authenticate();
     console.log("Database Connected");
 
-    await sequelize.sync();
+    await sequelize.sync({ alter: true });
     console.log("Tables Created");
 
     app.listen(PORT, () => {
