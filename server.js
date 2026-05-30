@@ -1,5 +1,7 @@
 require("dotenv").config();
 
+require("./src/bot/discordBot");
+require("./src/models/Service");
 const app = require("./src/app");
 const sequelize = require("./src/config/db");
 
@@ -12,7 +14,7 @@ const startServer = async () => {
     await sequelize.authenticate();
     console.log("Database Connected");
 
-    await sequelize.sync({ alter: true });
+    await sequelize.sync();
     console.log("Tables Created");
 
     app.listen(PORT, () => {

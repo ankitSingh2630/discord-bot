@@ -117,7 +117,8 @@ const login = async (req, res) => {
   } catch (err) {
 
     return res.status(400).json({
-      message: err.message
+      message: err.message,
+      error: err.errors
     });
 
   }
@@ -140,7 +141,8 @@ const getProfile = async (req, res) => {
 
       return res.status(500).json({
 
-         message: err.message
+         message: err.message,
+         error: err.errors
 
       });
 
