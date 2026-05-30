@@ -3,7 +3,7 @@ const {
 } = require("discord.js");
 
 const Service =
-require("../models/service");
+require("../models/Service");
 
 
 module.exports = {
